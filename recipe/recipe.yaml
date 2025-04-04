@@ -112,5 +112,6 @@ about:
 
 extra:
   recipe-maintainers:
+    - lgray
     - kratsg
     - matthewfeickert
