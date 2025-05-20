@@ -1,0 +1,14 @@
+diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
+index 5c06604..e7b09c9 100644
+--- a/examples/CMakeLists.txt
++++ b/examples/CMakeLists.txt
+@@ -23,7 +23,7 @@ add_executable(spherical options.cpp spherical.cpp)
+ target_link_libraries(spherical PUBLIC siscone_spherical)
+ 
+ if (MSVC)
+-  find_package(unofficial-getopt-win32 REQUIRED)
++  find_package(unofficial-getopt-win32)
+   target_link_libraries(siscone_main PRIVATE unofficial::getopt-win32::getopt)
+   target_link_libraries(siscone_area PRIVATE unofficial::getopt-win32::getopt)
+   target_link_libraries(siscone_test PRIVATE unofficial::getopt-win32::getopt)
+   
