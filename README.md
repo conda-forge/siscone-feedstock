@@ -200,5 +200,6 @@ Feedstock Maintainers
 =====================
 
 * [@kratsg](https://github.com/kratsg/)
+* [@lgray](https://github.com/lgray/)
 * [@matthewfeickert](https://github.com/matthewfeickert/)
 
