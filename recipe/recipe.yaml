@@ -12,7 +12,7 @@ source:
   patches: remove-getopt-required.patch
 
 build:
-  number: 0
+  number: 1
   script:
     # Get an updated config.sub and config.guess
     - cmake "${CMAKE_ARGS}" -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
@@ -29,7 +29,8 @@ requirements:
     - ${{ stdlib('c') }}
     - ${{ compiler('cxx') }}
     - cmake
-    - make
+    - if: unix
+      then: make
     - if: win
       then: getopt-win32
 
