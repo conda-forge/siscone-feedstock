@@ -107,7 +107,6 @@ tests:
         - if exist %PREFIX%\Library\include\siscone\spherical\protocones.h (echo exists) else (exit /B)
         - if exist %PREFIX%\Library\include\siscone\spherical\momentum.h (echo exists) else (exit /B)
         - if exist %PREFIX%\Library\include\siscone\spherical\hash.h (echo exists) else (exit /B)
-        - set PATH=%PREFIX%\Library\bin;%PATH%
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
