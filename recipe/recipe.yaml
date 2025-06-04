@@ -64,16 +64,9 @@ tests:
         - siscone/spherical/protocones.h
         - siscone/spherical/momentum.h
         - siscone/spherical/hash.h
-      if: unix
-      then: 
-        lib:
-          - siscone
-          - siscone_spherical
-      if: win
-      then:
-        files:
-          - Library/lib/siscone.lib
-          - Library/lib/siscone_spherical.lib
+      files:
+        - lib/*siscone.(so|dylib|lib)
+        - lib/*siscone_spherical.(so|dylib|lib)
   - script:
     - if: unix
       then:
