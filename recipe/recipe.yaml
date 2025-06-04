@@ -64,12 +64,11 @@ tests:
         - siscone/spherical/protocones.h
         - siscone/spherical/momentum.h
         - siscone/spherical/hash.h
-      files:
-        - lib/*siscone.(so|dylib|lib)
-        - lib/*siscone_spherical.(so|dylib|lib)
   - script:
     - if: unix
       then:
+        - test -f $PREFIX/lib/libsiscone${SHLIB_EXT}
+        - test -f $PREFIX/lib/libsiscone_spherical${SHLIB_EXT}
         - cd examples/
         - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
         - ./main
@@ -86,6 +85,8 @@ tests:
         - ./spherical
     - if: win
       then:
+        - if exist %PREFIX%\Library\lib\siscone.lib (call) else (exit /B)
+        - if exist %PREFIX%\Library\lib\siscone_spherical.lib (call) else (exit /B)
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
