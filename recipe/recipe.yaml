@@ -41,7 +41,7 @@ requirements:
 
 tests:
   - package_contents:
-    - include:
+    include:
       - siscone/config.h
       - siscone/geom_2d.h
       - siscone/defines.h
@@ -64,7 +64,7 @@ tests:
       - siscone/spherical/protocones.h
       - siscone/spherical/momentum.h
       - siscone/spherical/hash.h
-    - lib:
+    lib:
       - siscone
       - siscone_spherical
   - script:
