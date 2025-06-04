@@ -12,15 +12,19 @@ source:
   patches: remove-getopt-required.patch
 
 build:
-  number: 1
+  number: 2
   script:
     # Get an updated config.sub and config.guess
-    - cmake "${CMAKE_ARGS}" -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
+    - if: unix
+      then: cmake "${CMAKE_ARGS}" -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
+    - if: win
+      then: cmake %CMAKE_ARGS% -S . -B build
     - cmake -LH build
-    - cmake --build build --parallel="${CPU_COUNT}"
+    - if: unix
+      then: cmake --build build --parallel="${CPU_COUNT}"
+    - if: win
+      then: cmake --build build --config=Release --parallel="%CPU_COUNT%"
     - cmake --install build
-  skip:
-    - win
 
 requirements:
   run_exports:
@@ -34,61 +38,90 @@ requirements:
     - if: win
       then: getopt-win32
 
-tests:
-  - script:
-      - test -f $PREFIX/lib/libsiscone${SHLIB_EXT}
-      - test -f $PREFIX/lib/libsiscone_spherical${SHLIB_EXT}
-      - test -f $PREFIX/include/siscone/config.h
-      - test -f $PREFIX/include/siscone/geom_2d.h
-      - test -f $PREFIX/include/siscone/defines.h
-      - test -f $PREFIX/include/siscone/circulator.h
-      - test -f $PREFIX/include/siscone/area.h
-      - test -f $PREFIX/include/siscone/ranlux.h
-      - test -f $PREFIX/include/siscone/quadtree.h
-      - test -f $PREFIX/include/siscone/protocones.h
-      - test -f $PREFIX/include/siscone/momentum.h
-      - test -f $PREFIX/include/siscone/hash.h
-      - test -f $PREFIX/include/siscone/vicinity.h
-      - test -f $PREFIX/include/siscone/split_merge.h
-      - test -f $PREFIX/include/siscone/siscone.h
-      - test -f $PREFIX/include/siscone/siscone_error.h
-      - test -f $PREFIX/include/siscone/reference.h
-      - test -f $PREFIX/include/siscone/spherical/geom_2d.h
-      - test -f $PREFIX/include/siscone/spherical/vicinity.h
-      - test -f $PREFIX/include/siscone/spherical/split_merge.h
-      - test -f $PREFIX/include/siscone/spherical/siscone.h
-      - test -f $PREFIX/include/siscone/spherical/protocones.h
-      - test -f $PREFIX/include/siscone/spherical/momentum.h
-      - test -f $PREFIX/include/siscone/spherical/hash.h
 
-      - cd examples/
-      - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
-      - ./main
-      - $CXX area.cpp options.cpp -o area $CXXFLAGS $LDFLAGS -lsiscone
-      - ./area
-      - $CXX sample.cpp -o sample $CXXFLAGS $LDFLAGS -lsiscone
-      - ./sample
-      - $CXX test.cpp -o test $CXXFLAGS $LDFLAGS -lsiscone
-      - ./test
-      - $CXX times.cpp -o times $CXXFLAGS $LDFLAGS -lsiscone
-      - if: build_platform == target_platform
-        then: ./times
-      - $CXX spherical.cpp -o spherical $CXXFLAGS $LDFLAGS -lsiscone -lsiscone_spherical
-      - ./spherical
+tests:
+  - package_contents:
+      include:
+        - siscone/config.h
+        - siscone/geom_2d.h
+        - siscone/defines.h
+        - siscone/circulator.h
+        - siscone/area.h
+        - siscone/ranlux.h
+        - siscone/quadtree.h
+        - siscone/protocones.h
+        - siscone/momentum.h
+        - siscone/hash.h
+        - siscone/vicinity.h
+        - siscone/split_merge.h
+        - siscone/siscone.h
+        - siscone/siscone_error.h
+        - siscone/reference.h
+        - siscone/spherical/geom_2d.h
+        - siscone/spherical/vicinity.h
+        - siscone/spherical/split_merge.h
+        - siscone/spherical/siscone.h
+        - siscone/spherical/protocones.h
+        - siscone/spherical/momentum.h
+        - siscone/spherical/hash.h
+  - script:
+    - if: unix
+      then:
+        - test -f $PREFIX/lib/libsiscone${SHLIB_EXT}
+        - test -f $PREFIX/lib/libsiscone_spherical${SHLIB_EXT}
+        - cd examples/
+        - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
+        - ./main
+        - $CXX area.cpp options.cpp -o area $CXXFLAGS $LDFLAGS -lsiscone
+        - ./area
+        - $CXX sample.cpp -o sample $CXXFLAGS $LDFLAGS -lsiscone
+        - ./sample
+        - $CXX test.cpp -o test $CXXFLAGS $LDFLAGS -lsiscone
+        - ./test
+        - $CXX times.cpp -o times $CXXFLAGS $LDFLAGS -lsiscone
+        - if: build_platform == target_platform
+          then: ./times
+        - $CXX spherical.cpp -o spherical $CXXFLAGS $LDFLAGS -lsiscone -lsiscone_spherical
+        - ./spherical
+    - if: win
+      then:
+        - if exist %PREFIX%\Library\lib\siscone.lib (call) else (exit /B)
+        - if exist %PREFIX%\Library\lib\siscone_spherical.lib (call) else (exit /B)
+        - cd examples
+        - ..\build\examples\Release\siscone_main.exe
+        - ..\build\examples\Release\siscone_area.exe
+        - ..\build\examples\Release\sample.exe
+        - ..\build\examples\Release\siscone_test.exe
+        - if: build_platform == target_platform
+          then: ..\build\examples\Release\times.exe
+        - ..\build\examples\Release\spherical.exe
     files:
       source:
-        - examples/main.cpp
-        - examples/options.cpp
-        - examples/options.h
-        - examples/area.cpp
-        - examples/sample.cpp
-        - examples/test.cpp
-        - examples/times.cpp
-        - examples/spherical.cpp
+        - if: win
+          then:
+            - build/examples/Release/siscone_main.exe
+            - build/examples/Release/siscone_area.exe
+            - build/examples/Release/sample.exe
+            - build/examples/Release/siscone_test.exe
+            - build/examples/Release/times.exe
+            - build/examples/Release/spherical.exe
+        - if: unix
+          then:
+            - examples/main.cpp
+            - examples/options.cpp
+            - examples/options.h
+            - examples/area.cpp
+            - examples/sample.cpp
+            - examples/test.cpp
+            - examples/times.cpp
+            - examples/spherical.cpp
         - examples/events/single-event.dat
     requirements:
       run:
-        - ${{ compiler('cxx') }}
+        - if: win
+          then: getopt-win32
+        - if: unix
+          then: ${{ compiler('cxx') }}
 
 about:
   homepage: https://gitlab.com/fastjet/siscone
