@@ -41,32 +41,32 @@ requirements:
 
 tests:
   - package_contents:
-    include:
-      - siscone/config.h
-      - siscone/geom_2d.h
-      - siscone/defines.h
-      - siscone/circulator.h
-      - siscone/area.h
-      - siscone/ranlux.h
-      - siscone/quadtree.h
-      - siscone/protocones.h
-      - siscone/momentum.h
-      - siscone/hash.h
-      - siscone/vicinity.h
-      - siscone/split_merge.h
-      - siscone/siscone.h
-      - siscone/siscone_error.h
-      - siscone/reference.h
-      - siscone/spherical/geom_2d.h
-      - siscone/spherical/vicinity.h
-      - siscone/spherical/split_merge.h
-      - siscone/spherical/siscone.h
-      - siscone/spherical/protocones.h
-      - siscone/spherical/momentum.h
-      - siscone/spherical/hash.h
-    lib:
-      - siscone
-      - siscone_spherical
+      include:
+        - siscone/config.h
+        - siscone/geom_2d.h
+        - siscone/defines.h
+        - siscone/circulator.h
+        - siscone/area.h
+        - siscone/ranlux.h
+        - siscone/quadtree.h
+        - siscone/protocones.h
+        - siscone/momentum.h
+        - siscone/hash.h
+        - siscone/vicinity.h
+        - siscone/split_merge.h
+        - siscone/siscone.h
+        - siscone/siscone_error.h
+        - siscone/reference.h
+        - siscone/spherical/geom_2d.h
+        - siscone/spherical/vicinity.h
+        - siscone/spherical/split_merge.h
+        - siscone/spherical/siscone.h
+        - siscone/spherical/protocones.h
+        - siscone/spherical/momentum.h
+        - siscone/spherical/hash.h
+      lib:
+        - siscone
+        - siscone_spherical
   - script:
     - if: unix
       then:
