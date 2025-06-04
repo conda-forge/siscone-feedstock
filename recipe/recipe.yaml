@@ -40,33 +40,36 @@ requirements:
 
 
 tests:
+  - package_contents:
+    - include:
+      - siscone/config.h
+      - siscone/geom_2d.h
+      - siscone/defines.h
+      - siscone/circulator.h
+      - siscone/area.h
+      - siscone/ranlux.h
+      - siscone/quadtree.h
+      - siscone/protocones.h
+      - siscone/momentum.h
+      - siscone/hash.h
+      - siscone/vicinity.h
+      - siscone/split_merge.h
+      - siscone/siscone.h
+      - siscone/siscone_error.h
+      - siscone/reference.h
+      - siscone/spherical/geom_2d.h
+      - siscone/spherical/vicinity.h
+      - siscone/spherical/split_merge.h
+      - siscone/spherical/siscone.h
+      - siscone/spherical/protocones.h
+      - siscone/spherical/momentum.h
+      - siscone/spherical/hash.h
+    - lib:
+      - siscone
+      - siscone_spherical
   - script:
     - if: unix
       then:
-        - test -f $PREFIX/lib/libsiscone${SHLIB_EXT}
-        - test -f $PREFIX/lib/libsiscone_spherical${SHLIB_EXT}
-        - test -f $PREFIX/include/siscone/config.h
-        - test -f $PREFIX/include/siscone/geom_2d.h
-        - test -f $PREFIX/include/siscone/defines.h
-        - test -f $PREFIX/include/siscone/circulator.h
-        - test -f $PREFIX/include/siscone/area.h
-        - test -f $PREFIX/include/siscone/ranlux.h
-        - test -f $PREFIX/include/siscone/quadtree.h
-        - test -f $PREFIX/include/siscone/protocones.h
-        - test -f $PREFIX/include/siscone/momentum.h
-        - test -f $PREFIX/include/siscone/hash.h
-        - test -f $PREFIX/include/siscone/vicinity.h
-        - test -f $PREFIX/include/siscone/split_merge.h
-        - test -f $PREFIX/include/siscone/siscone.h
-        - test -f $PREFIX/include/siscone/siscone_error.h
-        - test -f $PREFIX/include/siscone/reference.h
-        - test -f $PREFIX/include/siscone/spherical/geom_2d.h
-        - test -f $PREFIX/include/siscone/spherical/vicinity.h
-        - test -f $PREFIX/include/siscone/spherical/split_merge.h
-        - test -f $PREFIX/include/siscone/spherical/siscone.h
-        - test -f $PREFIX/include/siscone/spherical/protocones.h
-        - test -f $PREFIX/include/siscone/spherical/momentum.h
-        - test -f $PREFIX/include/siscone/spherical/hash.h
         - cd examples/
         - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
         - ./main
@@ -83,30 +86,6 @@ tests:
         - ./spherical
     - if: win
       then:
-        - if exist %PREFIX%\Library\lib\siscone.lib (call) else (exit /B)
-        - if exist %PREFIX%\Library\lib\siscone_spherical.lib (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\config.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\geom_2d.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\defines.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\circulator.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\area.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\ranlux.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\quadtree.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\protocones.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\momentum.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\hash.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\vicinity.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\split_merge.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\siscone.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\siscone_error.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\reference.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\geom_2d.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\vicinity.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\split_merge.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\siscone.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\protocones.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\momentum.h (call) else (exit /B)
-        - if exist %PREFIX%\Library\include\siscone\spherical\hash.h (call) else (exit /B)
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
