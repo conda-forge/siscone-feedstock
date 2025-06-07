@@ -12,7 +12,7 @@ source:
   patches: remove-getopt-required.patch
 
 build:
-  number: 2
+  number: 3
   script:
     # Get an updated config.sub and config.guess
     - if: unix
@@ -64,11 +64,18 @@ tests:
         - siscone/spherical/protocones.h
         - siscone/spherical/momentum.h
         - siscone/spherical/hash.h
+      lib:
+        - if: unix
+          then:
+            - siscone
+            - siscone_spherical
+        - if: win
+          then:
+            - siscone.lib
+            - siscone_spherical.lib
   - script:
     - if: unix
       then:
-        - test -f $PREFIX/lib/libsiscone${SHLIB_EXT}
-        - test -f $PREFIX/lib/libsiscone_spherical${SHLIB_EXT}
         - cd examples/
         - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
         - ./main
@@ -85,8 +92,6 @@ tests:
         - ./spherical
     - if: win
       then:
-        - if exist %PREFIX%\Library\lib\siscone.lib (call) else (exit /B)
-        - if exist %PREFIX%\Library\lib\siscone_spherical.lib (call) else (exit /B)
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
