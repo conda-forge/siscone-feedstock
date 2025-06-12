@@ -42,7 +42,12 @@ requirements:
 tests:
   - package_contents:
       files:
-        - lib/cmake/siscone/siscone*.cmake
+        - if: unix
+          then: 
+            - lib/cmake/siscone/siscone*.cmake
+        - if: win
+          then: 
+            - Library/lib/cmake/siscone/siscone*.cmake
       include:
         - siscone/config.h
         - siscone/geom_2d.h
