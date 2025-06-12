@@ -12,7 +12,7 @@ source:
   patches: remove-getopt-required.patch
 
 build:
-  number: 3
+  number: 4
   script:
     # Get an updated config.sub and config.guess
     - if: unix
@@ -41,6 +41,8 @@ requirements:
 
 tests:
   - package_contents:
+      files:
+        - lib/cmake/siscone/siscone*.cmake
       include:
         - siscone/config.h
         - siscone/geom_2d.h
