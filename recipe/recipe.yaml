@@ -12,7 +12,7 @@ source:
   patches: remove-getopt-required.patch
 
 build:
-  number: 4
+  number: 5
   variant:
     use_keys:
       - x86_64_microarch_level
@@ -20,9 +20,9 @@ build:
   script:
     # Get an updated config.sub and config.guess
     - if: unix
-      then: cmake "${CMAKE_ARGS}" -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
+      then: cmake "${CMAKE_ARGS}" -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
     - if: win
-      then: cmake %CMAKE_ARGS% -S . -B build
+      then: cmake %CMAKE_ARGS% -DSISCONE_ENABLE_DEBUG=OFF -S . -B build
     - cmake -LH build
     - if: unix
       then: cmake --build build --parallel="${CPU_COUNT}"
@@ -47,6 +47,13 @@ requirements:
 
 tests:
   - package_contents:
+      files:
+        - if: unix
+          then: 
+            - lib/cmake/siscone/siscone*.cmake
+        - if: win
+          then: 
+            - Library/lib/cmake/siscone/siscone*.cmake
       include:
         - siscone/config.h
         - siscone/geom_2d.h
