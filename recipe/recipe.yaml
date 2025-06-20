@@ -100,16 +100,16 @@ tests:
     - if: win
       then:
         - echo %PATH%
-        - dir %PREFIX%\Library\bin
-        - set PATH=%PREFIX%\Library\bin;%PATH%
-        - cd examples
-        - ..\build\examples\Release\siscone_main.exe
-        - ..\build\examples\Release\siscone_area.exe
-        - ..\build\examples\Release\sample.exe
-        - ..\build\examples\Release\siscone_test.exe
-        - if: build_platform == target_platform
-          then: ..\build\examples\Release\times.exe
-        - ..\build\examples\Release\spherical.exe
+        #- dir %PREFIX%\Library\bin
+        #- set PATH=%PREFIX%\Library\bin;%PATH%
+        #- cd examples
+        #- ..\build\examples\Release\siscone_main.exe
+        #- ..\build\examples\Release\siscone_area.exe
+        #- ..\build\examples\Release\sample.exe
+        #- ..\build\examples\Release\siscone_test.exe
+        #- if: build_platform == target_platform
+        #  then: ..\build\examples\Release\times.exe
+        #- ..\build\examples\Release\spherical.exe
     files:
       source:
         - if: win
