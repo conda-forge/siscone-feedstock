@@ -1,6 +1,6 @@
 context:
   name: "siscone"
-  version: "3.1.1"
+  version: "3.1.2"
 
 package:
   name: ${{ name }}
@@ -8,11 +8,11 @@ package:
 
 source:
   url: https://gitlab.com/fastjet/siscone/-/archive/siscone-${{ version }}/siscone-siscone-${{ version }}.tar.gz
-  sha256: 270cc6821f1614a69a60a21224b6415081f02374256a2f1c70d39ec717fd96a0
-  patches: remove-getopt-required.patch
+  sha256: 689696ca32682f39c0999a66117e673f71b41f41debb46111904f6acdcdb2e6b
+  patches: 0001-use-imported-getopt.patch
 
 build:
-  number: 5
+  number: 1
   variant:
     use_keys:
       - x86_64_microarch_level
@@ -20,7 +20,7 @@ build:
   script:
     # Get an updated config.sub and config.guess
     - if: unix
-      then: cmake "${CMAKE_ARGS}" -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
+      then: cmake "${CMAKE_ARGS}" -DSISCONE_BUILD_EXAMPLES=OFF -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
     - if: win
       then: cmake %CMAKE_ARGS% -DSISCONE_ENABLE_DEBUG=OFF -S . -B build
     - cmake -LH build
@@ -49,10 +49,10 @@ tests:
   - package_contents:
       files:
         - if: unix
-          then: 
+          then:
             - lib/cmake/siscone/siscone*.cmake
         - if: win
-          then: 
+          then:
             - Library/lib/cmake/siscone/siscone*.cmake
       include:
         - siscone/config.h
@@ -86,33 +86,38 @@ tests:
           then:
             - siscone.lib
             - siscone_spherical.lib
+      bin:
+        - if: win
+          then:
+            - siscone.dll
+            - siscone_spherical.dll
   - script:
-    - if: unix
-      then:
-        - cd examples/
-        - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
-        - ./main
-        - $CXX area.cpp options.cpp -o area $CXXFLAGS $LDFLAGS -lsiscone
-        - ./area
-        - $CXX sample.cpp -o sample $CXXFLAGS $LDFLAGS -lsiscone
-        - ./sample
-        - $CXX test.cpp -o test $CXXFLAGS $LDFLAGS -lsiscone
-        - ./test
-        - $CXX times.cpp -o times $CXXFLAGS $LDFLAGS -lsiscone
-        - if: build_platform == target_platform
-          then: ./times
-        - $CXX spherical.cpp -o spherical $CXXFLAGS $LDFLAGS -lsiscone -lsiscone_spherical
-        - ./spherical
-    - if: win
-      then:
-        - cd examples
-        - ..\build\examples\Release\siscone_main.exe
-        - ..\build\examples\Release\siscone_area.exe
-        - ..\build\examples\Release\sample.exe
-        - ..\build\examples\Release\siscone_test.exe
-        - if: build_platform == target_platform
-          then: ..\build\examples\Release\times.exe
-        - ..\build\examples\Release\spherical.exe
+      - if: unix
+        then:
+          - cd examples/
+          - $CXX main.cpp options.cpp -o main $CXXFLAGS $LDFLAGS -lsiscone
+          - ./main
+          - $CXX area.cpp options.cpp -o area $CXXFLAGS $LDFLAGS -lsiscone
+          - ./area
+          - $CXX sample.cpp -o sample $CXXFLAGS $LDFLAGS -lsiscone
+          - ./sample
+          - $CXX test.cpp -o test $CXXFLAGS $LDFLAGS -lsiscone
+          - ./test
+          - $CXX times.cpp -o times $CXXFLAGS $LDFLAGS -lsiscone
+          - if: build_platform == target_platform
+            then: ./times
+          - $CXX spherical.cpp -o spherical $CXXFLAGS $LDFLAGS -lsiscone -lsiscone_spherical
+          - ./spherical
+      - if: win
+        then:
+          - cd examples
+          - ..\build\examples\Release\siscone_main.exe
+          - ..\build\examples\Release\siscone_area.exe
+          - ..\build\examples\Release\sample.exe
+          - ..\build\examples\Release\siscone_test.exe
+          - if: build_platform == target_platform
+            then: ..\build\examples\Release\times.exe
+          - ..\build\examples\Release\spherical.exe
     files:
       source:
         - if: win
