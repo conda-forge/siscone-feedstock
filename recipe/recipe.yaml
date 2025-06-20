@@ -80,6 +80,11 @@ tests:
           then:
             - siscone.lib
             - siscone_spherical.lib
+      bin:
+        - if: win
+          then:
+            - siscone.dll
+            - siscone_spherical.dll
   - script:
     - if: unix
       then:
@@ -99,17 +104,14 @@ tests:
         - ./spherical
     - if: win
       then:
-        - echo %PATH%
-        #- dir %PREFIX%\Library\bin
-        #- set PATH=%PREFIX%\Library\bin;%PATH%
-        #- cd examples
-        #- ..\build\examples\Release\siscone_main.exe
-        #- ..\build\examples\Release\siscone_area.exe
-        #- ..\build\examples\Release\sample.exe
-        #- ..\build\examples\Release\siscone_test.exe
-        #- if: build_platform == target_platform
-        #  then: ..\build\examples\Release\times.exe
-        #- ..\build\examples\Release\spherical.exe
+        - cd examples
+        - ..\build\examples\Release\siscone_main.exe
+        - ..\build\examples\Release\siscone_area.exe
+        - ..\build\examples\Release\sample.exe
+        - ..\build\examples\Release\siscone_test.exe
+        - if: build_platform == target_platform
+          then: ..\build\examples\Release\times.exe
+        - ..\build\examples\Release\spherical.exe
     files:
       source:
         - if: win
