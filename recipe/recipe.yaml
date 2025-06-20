@@ -101,6 +101,7 @@ tests:
       then:
         - echo %PATH%
         - dir %PREFIX%\Library\bin
+        - set PATH=%PREFIX%\Library\bin;%PATH%
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
