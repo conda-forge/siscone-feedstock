@@ -99,6 +99,7 @@ tests:
         - ./spherical
     - if: win
       then:
+        - echo %PATH%
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
