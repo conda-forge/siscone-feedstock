@@ -9,14 +9,14 @@ package:
 source:
   url: https://gitlab.com/fastjet/siscone/-/archive/siscone-${{ version }}/siscone-siscone-${{ version }}.tar.gz
   sha256: 689696ca32682f39c0999a66117e673f71b41f41debb46111904f6acdcdb2e6b
-  patches: remove-getopt-required.patch
+  patches: 0001-use-imported-getopt.patch
 
 build:
   number: 0
   script:
     # Get an updated config.sub and config.guess
     - if: unix
-      then: cmake "${CMAKE_ARGS}" -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
+      then: cmake "${CMAKE_ARGS}" -DSISCONE_BUILD_EXAMPLES=OFF -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
     - if: win
       then: cmake %CMAKE_ARGS% -DSISCONE_ENABLE_DEBUG=OFF -S . -B build
     - cmake -LH build
@@ -80,6 +80,11 @@ tests:
           then:
             - siscone.lib
             - siscone_spherical.lib
+      bin:
+        - if: win
+          then:
+            - siscone.dll
+            - siscone_spherical.dll
   - script:
       - if: unix
         then:
