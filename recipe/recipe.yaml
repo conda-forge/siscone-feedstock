@@ -100,6 +100,7 @@ tests:
     - if: win
       then:
         - echo %PATH%
+        - dir %PREFIX%\Library\bin
         - cd examples
         - ..\build\examples\Release\siscone_main.exe
         - ..\build\examples\Release\siscone_area.exe
