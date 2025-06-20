@@ -1,6 +1,6 @@
 context:
   name: "siscone"
-  version: "3.1.1"
+  version: "3.1.2"
 
 package:
   name: ${{ name }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://gitlab.com/fastjet/siscone/-/archive/siscone-${{ version }}/siscone-siscone-${{ version }}.tar.gz
-  sha256: 270cc6821f1614a69a60a21224b6415081f02374256a2f1c70d39ec717fd96a0
+  sha256: 689696ca32682f39c0999a66117e673f71b41f41debb46111904f6acdcdb2e6b
   patches: remove-getopt-required.patch
 
 build:
