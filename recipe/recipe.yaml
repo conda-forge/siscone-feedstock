@@ -12,11 +12,11 @@ source:
   patches: remove-getopt-required.patch
 
 build:
-  number: 4
+  number: 0
   script:
     # Get an updated config.sub and config.guess
     - if: unix
-      then: cmake "${CMAKE_ARGS}" -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
+      then: cmake "${CMAKE_ARGS}" -DSISCONE_BUILD_EXAMPLES=OFF -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
     - if: win
       then: cmake %CMAKE_ARGS% -DSISCONE_ENABLE_DEBUG=OFF -S . -B build
     - cmake -LH build
