@@ -42,12 +42,15 @@ requirements:
 tests:
   - package_contents:
       files:
+        - etc/conda/test-files/siscone/0/examples/events/single-event.dat
         - if: unix
           then:
             - lib/cmake/siscone/siscone*.cmake
+            - etc/conda/test-files/siscone/0/examples/*.cpp
         - if: win
           then:
             - Library/lib/cmake/siscone/siscone*.cmake
+            - etc/conda/test-files/siscone/0/examples/*.exe
       include:
         - siscone/config.h
         - siscone/geom_2d.h
