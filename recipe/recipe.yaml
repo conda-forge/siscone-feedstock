@@ -12,7 +12,7 @@ source:
   patches: 0001-use-imported-getopt.patch
 
 build:
-  number: 0
+  number: 1
   script:
     # Get an updated config.sub and config.guess
     - if: unix
