@@ -50,7 +50,7 @@ tests:
         - if: win
           then:
             - Library/lib/cmake/siscone/siscone*.cmake
-            - etc/conda/test-files/siscone/0/examples/Release/*.exe
+            - etc/conda/test-files/siscone/0/build/examples/Release/*.exe
       include:
         - siscone/config.h
         - siscone/geom_2d.h
