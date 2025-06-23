@@ -35,6 +35,9 @@ requirements:
     - cmake
     - if: unix
       then: make
+    - if: win and build_platform != target_platform
+      then: getopt-win32
+  host:
     - if: win
       then: getopt-win32
 
