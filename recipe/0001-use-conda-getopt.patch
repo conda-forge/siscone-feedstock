@@ -1,14 +1,14 @@
-From be07eea47901896f904202d76cc19493052b2d61 Mon Sep 17 00:00:00 2001
+From 73b0ea6d5cb64a168bbcd2375ceab7e6e2b5eb86 Mon Sep 17 00:00:00 2001
 From: Lindsey Gray <lindsey.gray@gmail.com>
 Date: Mon, 23 Jun 2025 13:32:43 -0500
 Subject: [PATCH] use conda getopt
 
 ---
- examples/CMakeLists.txt | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ examples/CMakeLists.txt | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
 diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
-index 0b26cda..c16c647 100644
+index 0b26cda..1c77135 100644
 --- a/examples/CMakeLists.txt
 +++ b/examples/CMakeLists.txt
 @@ -26,7 +26,7 @@ if (MSVC)
@@ -20,7 +20,7 @@ index 0b26cda..c16c647 100644
    
    # The following defines silence warnings about sscanf and other
    # c functions that don't have buffer-overrun protection built into them.
-@@ -40,10 +40,10 @@ if (MSVC)
+@@ -40,10 +40,17 @@ if (MSVC)
    target_compile_definitions(sample PUBLIC -D_CRT_SECURE_NO_WARNINGS)
    target_compile_definitions(spherical PUBLIC -D_CRT_SECURE_NO_WARNINGS)
  
@@ -32,6 +32,13 @@ index 0b26cda..c16c647 100644
 -  target_link_libraries(spherical PRIVATE unofficial::getopt-win32::getopt)
 -endif()
 \ No newline at end of file
++  target_include_directories(siscone_main PRIVATE $ENV{PREFIX}/Library/include)
++  target_include_directories(siscone_area PRIVATE $ENV{PREFIX}/Library/include)
++  target_include_directories(siscone_test PRIVATE $ENV{PREFIX}/Library/include)
++  target_include_directories(times PRIVATE $ENV{PREFIX}/Library/include)
++  target_include_directories(sample PRIVATE $ENV{PREFIX}/Library/include)
++  target_include_directories(spherical PRIVATE $ENV{PREFIX}/Library/include)
++
 +  target_link_libraries(siscone_main PRIVATE getopt)
 +  target_link_libraries(siscone_area PRIVATE getopt)
 +  target_link_libraries(siscone_test PRIVATE getopt)
