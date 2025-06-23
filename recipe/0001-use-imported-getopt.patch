@@ -18,8 +18,8 @@ index 0b26cda..98ba86c 100644
 -  find_package(unofficial-getopt-win32)
 +  add_library(getopt SHARED IMPORTED)
 +  set_target_properties(getopt PROPERTIES
-+                          IMPORTED_IMPLIB "$ENV{BUILD_PREFIX}\\Library\\lib\\getopt.lib"
-+                          IMPORTED_LOCATION "$ENV{BUILD_PREFIX}\\Library\\bin\\getopt.dll"
++                          IMPORTED_IMPLIB "$ENV{PREFIX}\\Library\\lib\\getopt.lib"
++                          IMPORTED_LOCATION "$ENV{PREFIX}\\Library\\bin\\getopt.dll"
 +                       )
    
    # The following defines silence warnings about sscanf and other
@@ -36,12 +36,12 @@ index 0b26cda..98ba86c 100644
 -  target_link_libraries(spherical PRIVATE unofficial::getopt-win32::getopt)
 -endif()
 \ No newline at end of file
-+  target_include_directories(siscone_main PRIVATE "$ENV{BUILD_PREFIX}\\Library\\include")
-+  target_include_directories(siscone_area PRIVATE "$ENV{BUILD_PREFIX}\\Library\\include")
-+  target_include_directories(siscone_test PRIVATE "$ENV{BUILD_PREFIX}\\Library\\include")
-+  target_include_directories(times PRIVATE "$ENV{BUILD_PREFIX}\\Library\\include")
-+  target_include_directories(sample PRIVATE "$ENV{BUILD_PREFIX}\\Library\\include")
-+  target_include_directories(spherical PRIVATE "$ENV{BUILD_PREFIX}\\Library\\include")
++  target_include_directories(siscone_main PRIVATE "$ENV{PREFIX}\\Library\\include")
++  target_include_directories(siscone_area PRIVATE "$ENV{PREFIX}\\Library\\include")
++  target_include_directories(siscone_test PRIVATE "$ENV{PREFIX}\\Library\\include")
++  target_include_directories(times PRIVATE "$ENV{PREFIX}\\Library\\include")
++  target_include_directories(sample PRIVATE "$ENV{PREFIX}\\Library\\include")
++  target_include_directories(spherical PRIVATE "$ENV{PREFIX}\\Library\\include")
 +
 +  target_link_libraries(siscone_main PRIVATE getopt)
 +  target_link_libraries(siscone_area PRIVATE getopt)
