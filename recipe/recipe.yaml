@@ -12,7 +12,7 @@ source:
   patches: 0001-use-imported-getopt.patch
 
 build:
-  number: 1
+  number: 2
   variant:
     use_keys:
       - x86_64_microarch_level
@@ -41,19 +41,24 @@ requirements:
     - cmake
     - if: unix
       then: make
+    - if: win and build_platform != target_platform
+      then: getopt-win32
+  host:
     - if: win
       then: getopt-win32
-
 
 tests:
   - package_contents:
       files:
+        - etc/conda/test-files/siscone/0/examples/events/single-event.dat
         - if: unix
           then:
             - lib/cmake/siscone/siscone*.cmake
+            - etc/conda/test-files/siscone/0/examples/*.cpp
         - if: win
           then:
             - Library/lib/cmake/siscone/siscone*.cmake
+            - etc/conda/test-files/siscone/0/build/examples/Release/*.exe
       include:
         - siscone/config.h
         - siscone/geom_2d.h
