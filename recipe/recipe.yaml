@@ -35,12 +35,11 @@ requirements:
     - cmake
     - if: unix
       then: make
-    - if: win and build_platform != target_platform
+    - if: win
       then: getopt-win32
   host:
     - if: win
       then: getopt-win32
-
 
 tests:
   - package_contents:
