@@ -9,7 +9,7 @@ package:
 source:
   url: https://gitlab.com/fastjet/siscone/-/archive/siscone-${{ version }}/siscone-siscone-${{ version }}.tar.gz
   sha256: 689696ca32682f39c0999a66117e673f71b41f41debb46111904f6acdcdb2e6b
-  patches: 0001-use-imported-getopt.patch
+  patches: 0001-use-conda-getopt.patch
 
 build:
   number: 1
@@ -35,7 +35,7 @@ requirements:
     - cmake
     - if: unix
       then: make
-    - if: win
+    - if: win and build_platform != target_platform
       then: getopt-win32
   host:
     - if: win

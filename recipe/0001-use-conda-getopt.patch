@@ -1,0 +1,32 @@
+From e075a6ca1c3d8c272fdd1c5574879080b3be2a91 Mon Sep 17 00:00:00 2001
+From: Lindsey Gray <lindsey.gray@gmail.com>
+Date: Mon, 23 Jun 2025 13:32:43 -0500
+Subject: [PATCH] use conda getopt
+
+---
+ examples/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
+index 0b26cda..dd0e73f 100644
+--- a/examples/CMakeLists.txt
++++ b/examples/CMakeLists.txt
+@@ -26,7 +26,7 @@ if (MSVC)
+   # This lets us have linux-like getopt on Windows.
+   # It is not marked required so that it's less difficult
+   # to inject the package into cmake via other means.
+-  find_package(unofficial-getopt-win32)
++  find_package(getopt)
+   
+   # The following defines silence warnings about sscanf and other
+   # c functions that don't have buffer-overrun protection built into them.
+@@ -46,4 +46,4 @@ if (MSVC)
+   target_link_libraries(times PRIVATE unofficial::getopt-win32::getopt)
+   target_link_libraries(sample PRIVATE unofficial::getopt-win32::getopt)
+   target_link_libraries(spherical PRIVATE unofficial::getopt-win32::getopt)
+-endif()
+\ No newline at end of file
++endif()
+-- 
+2.49.0
+
