@@ -22,7 +22,7 @@ build:
     - if: unix
       then: cmake --build build --parallel="${CPU_COUNT}"
     - if: win
-      then: cmake --build build --config=Release --parallel="%CPU_COUNT%"
+      then: cmake --build build --config=Release --parallel="%CPU_COUNT%" --verbose
     - cmake --install build
 
 requirements:
