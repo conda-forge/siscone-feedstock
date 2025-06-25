@@ -9,12 +9,11 @@ package:
 source:
   url: https://gitlab.com/fastjet/siscone/-/archive/siscone-${{ version }}/siscone-siscone-${{ version }}.tar.gz
   sha256: 689696ca32682f39c0999a66117e673f71b41f41debb46111904f6acdcdb2e6b
-  patches: 0001-use-imported-getopt.patch
+  # patches: 0001-use-imported-getopt.patch
 
 build:
   number: 1
   script:
-    # Get an updated config.sub and config.guess
     - if: unix
       then: cmake "${CMAKE_ARGS}" -DSISCONE_BUILD_EXAMPLES=OFF -DSISCONE_ENABLE_DEBUG=OFF -DCMAKE_INSTALL_PREFIX="${PREFIX}" -S . -B build
     - if: win
