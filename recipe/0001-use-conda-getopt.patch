@@ -1,0 +1,33 @@
+From 7d52594327df440af1e40f62e6850a8f1236be3a Mon Sep 17 00:00:00 2001
+From: Lindsey Gray <lindsey.gray@gmail.com>
+Date: Wed, 25 Jun 2025 08:55:26 -0500
+Subject: [PATCH] use conda getopt
+
+---
+ examples/CMakeLists.txt | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
+index 0b26cda..1d72dbc 100644
+--- a/examples/CMakeLists.txt
++++ b/examples/CMakeLists.txt
+@@ -40,10 +40,10 @@ if (MSVC)
+   target_compile_definitions(sample PUBLIC -D_CRT_SECURE_NO_WARNINGS)
+   target_compile_definitions(spherical PUBLIC -D_CRT_SECURE_NO_WARNINGS)
+ 
+-  target_link_libraries(siscone_main PRIVATE unofficial::getopt-win32::getopt)
+-  target_link_libraries(siscone_area PRIVATE unofficial::getopt-win32::getopt)
+-  target_link_libraries(siscone_test PRIVATE unofficial::getopt-win32::getopt)
+-  target_link_libraries(times PRIVATE unofficial::getopt-win32::getopt)
+-  target_link_libraries(sample PRIVATE unofficial::getopt-win32::getopt)
+-  target_link_libraries(spherical PRIVATE unofficial::getopt-win32::getopt)
++  target_link_libraries(siscone_main PUBLIC unofficial::getopt-win32::getopt)
++  target_link_libraries(siscone_area PUBLIC unofficial::getopt-win32::getopt)
++  target_link_libraries(siscone_test PUBLIC unofficial::getopt-win32::getopt)
++  target_link_libraries(times PUBLIC unofficial::getopt-win32::getopt)
++  target_link_libraries(sample PUBLIC unofficial::getopt-win32::getopt)
++  target_link_libraries(spherical PUBLIC unofficial::getopt-win32::getopt)
+ endif()
+\ No newline at end of file
+-- 
+2.49.0
