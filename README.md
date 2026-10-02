@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/siscone-feedsto
 
 Home: https://gitlab.com/fastjet/siscone
 
-Package license: AGPL-1.0-only
+Package license: GPL-2.0-or-later
 
 Summary: SISCone: the Seedless Infrared Safe Cone Jet Algorithm
 
@@ -70,6 +70,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-siscone-green.svg)](https://anaconda.org/conda-forge/siscone) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/siscone.svg)](https://anaconda.org/conda-forge/siscone) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/siscone.svg)](https://anaconda.org/conda-forge/siscone) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/siscone.svg)](https://anaconda.org/conda-forge/siscone) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-siscone--devel-green.svg)](https://anaconda.org/conda-forge/siscone-devel) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/siscone-devel.svg)](https://anaconda.org/conda-forge/siscone-devel) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/siscone-devel.svg)](https://anaconda.org/conda-forge/siscone-devel) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/siscone-devel.svg)](https://anaconda.org/conda-forge/siscone-devel) |
 
 Installing siscone
 ==================
@@ -88,7 +89,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install siscone
+conda install siscone siscone-devel
 ```
 
 </details>
@@ -97,7 +98,7 @@ conda install siscone
 <summary>With mamba</summary>
 
 ```
-mamba install siscone
+mamba install siscone siscone-devel
 ```
 
 </details>
@@ -107,9 +108,9 @@ mamba install siscone
 
 ```
 # for adding to your local project
-pixi add siscone
+pixi add siscone siscone-devel
 # for installing globally
-pixi global install siscone
+pixi global install siscone siscone-devel
 ```
 
 </details>
